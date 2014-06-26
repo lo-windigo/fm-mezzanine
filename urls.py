@@ -22,7 +22,7 @@ urlpatterns = i18n_patterns("",
 urlpatterns += patterns('',
 
 	# Include the URLs from the herbs module
-    ("^", include("herbs.urls")),
+    #("^", include("herbs.urls")),
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
