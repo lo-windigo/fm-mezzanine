@@ -1,11 +1,10 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from mezzanine.core.models import Orderable
-from mezzanine.galleries.models import Gallery, GalleryImage
 from mezzanine.pages.models import Page, RichText
 
 
-class HerbGallery(Gallery):
+class HerbGallery(Page):
 
 	class Meta:
 		verbose_name = u"Herb Gallery"
@@ -24,10 +23,12 @@ class HerbGallery(Gallery):
 #		return reverse("herb-gallery", args=[self.desc])
 
 
-class Herb(GalleryImage):
+class Herb(Orderable):
+	image   = models.ImageField("Picture", blank=True, upload_to="herbs/")
 	common  = models.CharField("Herb", max_length=500)
 	latin   = models.CharField('Botanical Name', max_length=500)
 	price   = models.DecimalField('Dried Per Oz', max_digits=6, decimal_places=2)
+	gallery = models.ForeignKey(HerbGallery, blank=True)
 
 	class Meta:
 		verbose_name = u"Herb"

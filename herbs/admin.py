@@ -1,3 +1,4 @@
+from copy import deepcopy
 from django.contrib import admin
 from herbs.models import Herb, HerbGallery
 from mezzanine.core.admin import TabularDynamicInlineAdmin
@@ -8,8 +9,8 @@ class HerbInline(TabularDynamicInlineAdmin):
 	model = Herb
 
 
-class HerbAdmin(PageAdmin):
+class HerbGalleryAdmin(PageAdmin):
 	inlines = (HerbInline,)
 
 #admin.site.register(Herb, PageAdmin)
-admin.site.register(HerbGallery, HerbAdmin)
+admin.site.register(HerbGallery, HerbGalleryAdmin)
