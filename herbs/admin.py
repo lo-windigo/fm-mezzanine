@@ -11,6 +11,10 @@ class HerbInline(TabularDynamicInlineAdmin):
 
 class HerbGalleryAdmin(PageAdmin):
 	inlines = (HerbInline,)
+	prepopulated_fields = {
+		"l_slug": ("latin",),
+		"c_slug": ("common",),
+	}
 
 #admin.site.register(Herb, PageAdmin)
 admin.site.register(HerbGallery, HerbGalleryAdmin)
