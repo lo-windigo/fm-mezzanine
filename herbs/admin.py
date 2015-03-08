@@ -7,14 +7,14 @@ from mezzanine.pages.admin import PageAdmin
 
 class HerbInline(TabularDynamicInlineAdmin):
 	model = Herb
-
-
-class HerbGalleryAdmin(PageAdmin):
-	inlines = (HerbInline,)
 	prepopulated_fields = {
 		"l_slug": ("latin",),
 		"c_slug": ("common",),
 	}
+
+
+class HerbGalleryAdmin(PageAdmin):
+	inlines = (HerbInline,)
 
 #admin.site.register(Herb, PageAdmin)
 admin.site.register(HerbGallery, HerbGalleryAdmin)
