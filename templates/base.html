@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+	{#<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">#}
+
+	{% ifinstalled mezzanine.blog %}
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+	<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+	{% endifinstalled %}
+
+	{% compress css %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/layout.css" %}">
+	{% ifinstalled cartridge.shop %}
+	<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+	{% endifinstalled %}
+	{% block extra_css %}{% endblock %}
+
+	{% endcompress %}
+
+	{% compress js %}
+	{% block extra_js %}{% endblock %}
+	{% endcompress %}
+
+	{% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+	<a class="a11y-link" href="#content">Skip to content</a>
+	<header class="header">
+		<a class="logo" href="/"><img src="img/logo.jpg" width="192" height="160"
+			alt="The Flower Moon Farm Logo"></a>
+		<nav>
+			<ul class="nav">
+				<li class="nav-item"><a href="#" class="glass-block">Herbs</a></li>
+				<li class="nav-item"><a href="#" class="glass-block">About</a></li>
+				<li class="nav-item"><a href="#" class="glass-block">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section class="content">
+		{% nevercache %}
+		{% if messages %}
+		<div class="messages">
+		{% for message in messages %}
+		<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{ message }}
+		</div>
+		{% endfor %}
+		</div>
+		{% endif %}
+		{% endnevercache %}
+
+		<h1>{% block title %}{% endblock %}</h1>
+
+<div class="container">
+<div class="row">
+
+<div class="col-md-2 left">
+    {% block left_panel %}
+    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
+    {% endblock %}
+</div>
+
+    {% block main %}{% endblock %}
+
+<div class="col-md-3 right">
+    {% nevercache %}
+    {% include "includes/user_panel.html" %}
+    {% endnevercache %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+    {% block right_panel %}
+    {% endblock %}
+    </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<footer>
+<div class="container">
+{% page_menu "pages/menus/footer.html" %}
+</div>
+</footer>
+
+{% include "includes/footer_scripts.html" %}
+
+</body>
+</html>
