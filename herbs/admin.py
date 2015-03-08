@@ -1,20 +1,22 @@
-from copy import deepcopy
+from __future__ import unicode_literals
+
 from django.contrib import admin
-from herbs.models import Herb, HerbGallery
+
 from mezzanine.core.admin import TabularDynamicInlineAdmin
 from mezzanine.pages.admin import PageAdmin
+from models import HerbGallery, Herb
 
 
-class HerbInline(TabularDynamicInlineAdmin):
-	model = Herb
-	prepopulated_fields = {
-		"l_slug": ("latin",),
-		"c_slug": ("common",),
-	}
+class HerbImageInline(TabularDynamicInlineAdmin):
+    model = Herb
 
 
 class HerbGalleryAdmin(PageAdmin):
-	inlines = (HerbInline,)
 
-#admin.site.register(Herb, PageAdmin)
+    class Media:
+        css = {"all": ("mezzanine/css/admin/gallery.css",)}
+
+    inlines = (HerbImageInline,)
+
+
 admin.site.register(HerbGallery, HerbGalleryAdmin)
