@@ -33,14 +33,17 @@
 
 	<a class="a11y-link" href="#content">Skip to content</a>
 	<header class="header">
-		<a class="logo" href="/"><img src="img/logo.jpg" width="192" height="160"
+		<a class="logo" href="/"><img src="{% static "img/logo.jpg" %}" width="192" height="160"
 			alt="The Flower Moon Farm Logo"></a>
 		<nav>
+			{% page_menu "pages/menus/primary.html" %}
+			{% comment %}
 			<ul class="nav">
 				<li class="nav-item"><a href="#" class="glass-block">Herbs</a></li>
 				<li class="nav-item"><a href="#" class="glass-block">About</a></li>
 				<li class="nav-item"><a href="#" class="glass-block">Contact</a></li>
 			</ul>
+			{% endcomment %}
 		</nav>
 	</header>
 	<section class="content">
@@ -56,40 +59,22 @@
 		</div>
 		{% endif %}
 		{% endnevercache %}
-
 		<h1>{% block title %}{% endblock %}</h1>
+		{% block main %}{% endblock %}
 
-<div class="container">
-<div class="row">
-
-<div class="col-md-2 left">
-    {% block left_panel %}
-    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-
-    {% block main %}{% endblock %}
-
-<div class="col-md-3 right">
-    {% nevercache %}
-    {% include "includes/user_panel.html" %}
-    {% endnevercache %}
-    <div class="panel panel-default">
-    <div class="panel-body">
-    {% block right_panel %}
-    {% endblock %}
-    </div>
-    </div>
-</div>
-
-</div>
-</div>
-
-<footer>
-<div class="container">
-{% page_menu "pages/menus/footer.html" %}
-</div>
-</footer>
+		{% nevercache %}
+		{% include "includes/user_panel.html" %}
+		{% endnevercache %}
+		<div class="panel panel-default">
+		<div class="panel-body">
+		{% block right_panel %}
+		{% endblock %}
+		</div>
+		</div>
+	</section>
+	<footer>
+		© 2014 Flower Moon Farm.
+	</footer>
 
 {% include "includes/footer_scripts.html" %}
 
