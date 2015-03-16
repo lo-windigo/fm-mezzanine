@@ -110,7 +110,7 @@ class HerbGallery(Page, RichText):
 class Herb(Orderable):
 
 	#gallery = models.ManyToManyField(HerbGallery)
-	gallery = models.ForeignKey(HerbGallery, related_name="images")
+	gallery = models.ForeignKey(HerbGallery, related_name="herbs")
 	file = FileField(_("File"), max_length=200, format="Image",
 		upload_to=upload_to("herbs.Herb.file", "herbs"))
 	herb = models.CharField(_("Herb"), max_length=1000, blank=True)

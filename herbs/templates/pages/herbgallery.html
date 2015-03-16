@@ -13,31 +13,23 @@
 {{ page.herbgallery.content|richtext_filters|safe }}
 {% endeditable %}
 
-<div class="gallery row">
-{% with page.herbgallery.images.all as images %}
-{% for image in images %}
-<div class="col-xs-4 col-sm-3">
-    <a class="thumbnail" rel="#image-{{ image.id }}" title="{{ image.image }}" href="{{ image.file.url }}">
-        <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail image.file 131 75 %}">
-    </a>
-</div>
+		<section class="herbs">
+{% with page.herbgallery.herbs.all as herbs %}
+{% for herb in herbs %}
+			<article class="herb glass-block">
+				<header>
+					<h1 class="herb-primary">{{ herb.herb }}</h1>
+					<h2 class="herb-secondary">{{ herb.latin }}</h2>
+				</header>
+				<p>
+					<a title="{{ herb.herb }}" href="#"><img src=
+						"{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}"></a>
+				</p>
+				<p>
+					{#{ herb.image }#} PRICE
+				</p>
+			</article>
 {% endfor %}
 {% endwith %}
-</div>
-{% endblock %}
-
-{% block extra_js %}
-{{ block.super }}
-<script src="{% static "mezzanine/js/magnific-popup.js" %}"></script>
-<script>
-$(document).ready(function() {
-    $('.gallery').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-        gallery: {
-            enabled: true,
-        }
-    });
-});
-</script>
+		</section>
 {% endblock %}
