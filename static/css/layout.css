@@ -1,0 +1,246 @@
+/*
+	Flower Moon Farms
+
+	Layout © Flower Moon Farms, Jacob Hume
+	Licensed AGPLv3, Rock on.
+*/
+
+
+/*= Base Styles ============*/
+
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a {
+	color: #4A6713;
+}
+
+body {
+	color: #320;
+	font-family: serif;
+	font-size: 24px;
+	margin: 0;
+}
+
+footer {
+	clear: both;
+	color: #ccc;
+	margin: 0 2em 0 10em;
+	padding: 2em 0;
+	text-align: center;
+	text-shadow: 1px 1px 0 #333;
+}
+
+h1,
+h2 {
+}
+
+article>h1,
+section>h1 {
+	margin-top: 0;
+}
+
+html {
+	background: #f1f1f1;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+
+/*= Modules ================*/
+
+.a11y-link {
+	background: #fff;
+	position: fixed;
+	top: -10em;
+	left: 1em;
+}
+
+.content {
+	margin: 2em 2em 1em 10em;
+}
+
+.content-title {
+	color: #9C7D23;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.content-title:after {
+	content: "~";
+}
+
+.content-title:before {
+	content: "~";
+}
+
+.glass-block {
+	background-color: #ddd;
+	border-radius: .5em;
+	box-shadow:
+		inset 0 1em 1em #fff,
+		3px 3px 0 rgba(0,0,0,.3);
+	color: #333;
+	display: block;
+	padding: 1em;
+	transition: all ease-out .5s;
+}
+
+.glass-block.herb {
+	/*transition: none;*/
+}
+
+.header,
+.logo {
+	background: #234311;
+	box-shadow: 3px 3px 3px rgba(35,67,17,.5);
+	position: relative;
+	z-index: 10;
+}
+
+.header {
+	/* Prevent drop shadow from starting late */
+	background-image: linear-gradient(#4A6713, #234311 6em);
+	background-image: url('/static/img/nav.jpg');
+	background-size: auto 100%;
+	margin-left: -3px;
+	padding-left: 3px;
+}
+
+.herb {
+	display: inline-block;
+	margin: .5em;
+	text-align: center;
+	width: 12em;
+}
+
+.herb img {
+	width: 5em;
+}
+
+.herb p {
+	margin: 1em 0 0 0;
+}
+
+.herb-primary,
+.herb-secondary {
+	font-size: 1em;
+	height: 1.8em;
+	line-height: .8;
+	margin: 0;
+}
+
+.herb-secondary {
+	font-size: .8em;
+	font-style: italic;
+	font-weight: normal;
+}
+
+.herb-secondary:after {
+	content: ")";
+}
+
+.herb-secondary:before {
+	content: "(";
+}
+
+.herbs {
+	text-align:center;
+}
+
+/* Logo */
+.logo {
+	background-image: linear-gradient(#4A6713 -3.1em, #234311 2.9em);
+	border-radius: 0 0 .5em .5em;
+	float: left;
+	padding: 3.1em 1em .5em 1em;
+	margin: 0 1em 0 1em;
+}
+
+.logo>img {
+	/*border: .1em solid #000;*/
+	border-radius: .25em;
+	box-shadow: 1px 1px .1em #182E0C;
+	height: 5em;
+	margin-top: -2.5em;
+	width: 6em;
+}
+
+/* Main Navigation */
+.nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: right;
+}
+
+.nav-item {
+	display: inline-block;
+	margin: .5em;
+}
+
+.nav-item .glass-block {
+	padding: .5em;
+	text-decoration: none;
+}
+
+/* Site Title */
+.site-title {
+	color: inherit;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/*= State ==================*/
+
+.a11y-link:active,
+.ally-link:focus {
+	top: 1em;
+}
+
+.glass-block:active,
+.glass-block:hover {
+	background-color: #fff;
+	box-shadow:
+		inset 0 0 0 #fff,
+		3px 3px 0 rgba(0,0,0,.5);
+	color: #636363;
+}
+
+
+
+/*= Responsive =================*/
+
+@media screen and (max-width: 450px) {
+
+	body {
+		font-size: 16px;
+	}
+
+	.header {
+		position: relative;
+	}
+
+	.logo {
+		position: absolute;
+		top: 100%;
+		left: .5em;
+		margin-top: .25em;
+		height: 172px;
+		width: 90px;
+	}
+
+	.nav {
+		margin-left: 122px;
+	}
+
+	.nav-item {
+		margin: .5em 0 .5em .25em;
+	}
+}
