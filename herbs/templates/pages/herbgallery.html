@@ -12,7 +12,6 @@
 {% editable page.herbgallery.content %}
 {{ page.herbgallery.content|richtext_filters|safe }}
 {% endeditable %}
-
 		<section class="herbs">
 {% with page.herbgallery.herbs.all as herbs %}
 {% for herb in herbs %}
@@ -22,8 +21,9 @@
 					<h2 class="herb-secondary">{{ herb.latin }}</h2>
 				</header>
 				<p>
-					<a title="{{ herb.herb }}" href="#"><img src=
-						"{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}"></a>
+					<a title="{{ herb.herb }}" href="#">
+						<img src="{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}">
+					</a>
 				</p>
 				<p>
 					{#{ herb.image }#} PRICE
