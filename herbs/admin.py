@@ -7,16 +7,11 @@ from mezzanine.pages.admin import PageAdmin
 from models import HerbGallery, Herb
 
 
-class HerbImageInline(TabularDynamicInlineAdmin):
-    model = Herb
-
-
 class HerbGalleryAdmin(PageAdmin):
 
     class Media:
         css = {"all": ("mezzanine/css/admin/gallery.css",)}
 
-    inlines = (HerbImageInline,)
-
 
 admin.site.register(HerbGallery, HerbGalleryAdmin)
+admin.site.register(Herb)

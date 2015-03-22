@@ -40,89 +40,36 @@ if settings.PACKAGE_NAME_FILEBROWSER in settings.INSTALLED_APPS:
 
 class HerbGallery(Page, RichText):
 	"""
-	Page bucket for gallery photos.
+	Page of herbs
 	"""
-
-	zip_import = models.FileField(verbose_name=_("Zip import"), blank=True,
-		upload_to=upload_to("herbs.HerbGallery.zip_import", "herbs"),
-		help_text=_("Upload a zip file containing images, and "
-					"they'll be imported into this gallery."))
 
 	class Meta:
 		verbose_name = _("Herb Gallery")
 		verbose_name_plural = _("Herb Galleries")
 
-	def save(self, delete_zip_import=True, *args, **kwargs):
-		"""
-		If a zip file is uploaded, extract any images from it and add
-		them to the gallery, before removing the zip file.
-		"""
-		super(HerbGallery, self).save(*args, **kwargs)
-		if self.zip_import:
-			zip_file = ZipFile(self.zip_import)
-			for name in zip_file.namelist():
-				data = zip_file.read(name)
-				try:
-					from PIL import Image
-					image = Image.open(BytesIO(data))
-					image.load()
-					image = Image.open(BytesIO(data))
-					image.verify()
-				except ImportError:
-					pass
-				except:
-					continue
-				name = os.path.split(name)[1]
-				# This is a way of getting around the broken nature of
-				# os.path.join on Python 2.x. See also the comment below.
-				if isinstance(name, bytes):
-					tempname = name.decode('utf-8')
-				else:
-					tempname = name
 
-				# A gallery with a slug of "/" tries to extract files
-				# to / on disk; see os.path.join docs.
-				slug = self.slug if self.slug != "/" else ""
-				path = os.path.join(GALLERIES_UPLOAD_DIR, slug, tempname)
-				try:
-					saved_path = default_storage.save(path, ContentFile(data))
-				except UnicodeEncodeError:
-					from warnings import warn
-					warn("A file was saved that contains unicode "
-						 "characters in its path, but somehow the current "
-						 "locale does not support utf-8. You may need to set "
-						 "'LC_ALL' to a correct value, eg: 'en_US.UTF-8'.")
-					# The native() call is needed here around str because
-					# os.path.join() in Python 2.x (in posixpath.py)
-					# mixes byte-strings with unicode strings without
-					# explicit conversion, which raises a TypeError as it
-					# would on Python 3.
-					path = os.path.join(GALLERIES_UPLOAD_DIR, slug,
-										native(str(name, errors="ignore")))
-					saved_path = default_storage.save(path, ContentFile(data))
-				self.images.add(Herb(file=saved_path))
-			if delete_zip_import:
-				zip_file.close()
-				self.zip_import.delete(save=True)
+class Herb(models.Model):
+	"""
+	A single herb
+	"""
 
-
-@python_2_unicode_compatible
-class Herb(Orderable):
-
-	#gallery = models.ManyToManyField(HerbGallery)
-	gallery = models.ForeignKey(HerbGallery, related_name="herbs")
+	gallery = models.ManyToManyField(HerbGallery, blank=True)
 	file = FileField(_("File"), max_length=200, format="Image",
-		upload_to=upload_to("herbs.Herb.file", "herbs"))
+		upload_to=upload_to("herbs.Herb.file", "herbs"), blank=True)
 	herb = models.CharField(_("Herb"), max_length=1000, blank=True)
 	latin = models.CharField(_("Latin"), max_length=1000, blank=True)
+	price_per_oz = models.DecimalField(_("Price Per Oz"), max_digits=9,
+		decimal_places=2, blank=True)
 
 	class Meta:
-		ordering = ('herb',)
+		ordering = ('herb', 'latin',)
 		verbose_name = _("Herb")
 		verbose_name_plural = _("Herbs")
 
-	def __str__(self):
+
+	def __unicode__(self, *args, **kwargs):
 		return self.herb
+
 
 	def save(self, *args, **kwargs):
 		"""

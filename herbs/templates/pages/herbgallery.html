@@ -13,7 +13,7 @@
 {{ page.herbgallery.content|richtext_filters|safe }}
 {% endeditable %}
 		<section class="herbs">
-{% with page.herbgallery.herbs.all as herbs %}
+{% with page.herbgallery.herb_set.all as herbs %}
 {% for herb in herbs %}
 			<article class="herb glass-block">
 				<header>
@@ -21,12 +21,12 @@
 					<h2 class="herb-secondary">{{ herb.latin }}</h2>
 				</header>
 				<p>
-					<a title="{{ herb.herb }}" href="#">
+					<a title="{{ herb.herb }}" href="{#% url 'herb' %#}">
 						<img src="{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}">
 					</a>
 				</p>
 				<p>
-					{#{ herb.image }#} PRICE
+					${{ herb.price_per_oz }}
 				</p>
 			</article>
 {% endfor %}

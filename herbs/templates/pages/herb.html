@@ -1,0 +1,23 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+{% load thumbnail %}
+
+{% block main %}
+{{ block.super }}
+
+		<section class="herb">
+			<header>
+				<h1 class="herb-primary">{{ herb.herb }}</h1>
+				<h2 class="herb-secondary">{{ herb.latin }}</h2>
+			</header>
+			<p>
+				<a title="{{ herb.herb }}" href="{% url herb %}">
+					<img src="{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}">
+				</a>
+			</p>
+			<p>
+				{{ herb.price_per_oz }}
+			</p>
+		</section>
+{% endblock %}
