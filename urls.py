@@ -6,8 +6,10 @@ from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
 
+import herbs
 
 admin.autodiscover()
+
 
 # Add the urlpatterns for any custom Django applications here.
 # You can also change the ``home`` view to add your own functionality
@@ -19,7 +21,7 @@ urlpatterns = i18n_patterns("",
     ("^admin/", include(admin.site.urls)),
 )
 
-urlpatterns += patterns('',
+urlpatterns += patterns("",
 
 	# Include the URLs from the herbs module
     #("^", include("herbs.urls")),
@@ -35,6 +37,8 @@ urlpatterns += patterns('',
     # one out.
 
     url("^$", direct_to_template, {"template": "pages/index.html"}, name="home"),
+
+    url("^herb/", include("herbs.urls", app_name="herbs", namespace="herbs")),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -72,7 +76,7 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    ("^", include("mezzanine.urls")),
+    url("^", include("mezzanine.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------

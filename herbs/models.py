@@ -10,17 +10,12 @@ from zipfile import ZipFile
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-try:
-	from django.utils.encoding import force_text
-except ImportError:
-	# Django < 1.5
-	from django.utils.encoding import force_unicode as force_text
+from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from mezzanine.conf import settings
 from mezzanine.core.fields import FileField
-from mezzanine.core.models import Orderable, RichText
+from mezzanine.core.models import Displayable, Orderable, RichText
 from mezzanine.pages.models import Page
 from mezzanine.utils.importing import import_dotted_path
 from mezzanine.utils.models import upload_to
@@ -38,37 +33,43 @@ if settings.PACKAGE_NAME_FILEBROWSER in settings.INSTALLED_APPS:
 		pass
 
 
+
+"""
+Page of herbs
+"""
 class HerbGallery(Page, RichText):
-	"""
-	Page of herbs
-	"""
 
 	class Meta:
 		verbose_name = _("Herb Gallery")
 		verbose_name_plural = _("Herb Galleries")
 
 
-class Herb(models.Model):
-	"""
-	A single herb
-	"""
+
+"""
+A single herb
+"""
+class Herb(Displayable):
 
 	gallery = models.ManyToManyField(HerbGallery, blank=True)
 	file = FileField(_("File"), max_length=200, format="Image",
 		upload_to=upload_to("herbs.Herb.file", "herbs"), blank=True)
-	herb = models.CharField(_("Herb"), max_length=1000, blank=True)
 	latin = models.CharField(_("Latin"), max_length=1000, blank=True)
 	price_per_oz = models.DecimalField(_("Price Per Oz"), max_digits=9,
 		decimal_places=2, blank=True)
 
+
 	class Meta:
-		ordering = ('herb', 'latin',)
+		ordering = ('title',)
 		verbose_name = _("Herb")
 		verbose_name_plural = _("Herbs")
 
 
 	def __unicode__(self, *args, **kwargs):
-		return self.herb
+		return self.title
+
+
+	def get_absolute_url(self):
+		return reverse("herb", kwargs={"slug": self.slug})
 
 
 	def save(self, *args, **kwargs):
