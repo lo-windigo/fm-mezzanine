@@ -77,7 +77,7 @@ class Herb(Displayable):
 		If no herb name is given when created, create one from the
 		file name.
 		"""
-		if not self.id and not self.herb:
+		if not self.id and not self.title:
 			name = force_text(self.file.name)
 			name = name.rsplit("/", 1)[-1].rsplit(".", 1)[0]
 			name = name.replace("'", "")
@@ -86,5 +86,5 @@ class Herb(Displayable):
 			# http://bugs.python.org/issue6412
 			name = "".join([s.upper() if i == 0 or name[i - 1] == " " else s
 							for i, s in enumerate(name)])
-			self.herb = name
+			self.title = name
 		super(Herb, self).save(*args, **kwargs)
