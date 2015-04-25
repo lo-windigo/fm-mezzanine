@@ -23,6 +23,8 @@ body {
 	font-family: serif;
 	font-size: 24px;
 	margin: 0;
+	/* Accessibility link positioning */
+	position: relative;
 }
 
 footer {
@@ -54,13 +56,20 @@ html {
 
 /*= Modules ================*/
 
+/* Accessibility link */
 .a11y-link {
 	background: #fff;
-	position: fixed;
-	top: -10em;
-	left: 1em;
+	border: 1px solid #333;
+	border-radius: 1em;
+	padding: .5em;
+	position: absolute;
+	left: .5em;
+	top: -5em;
+	transition: 1s top;
+	z-index: 5000;
 }
 
+/* Main content */
 .content {
 	margin: 2em 2em 1em 10em;
 }
@@ -79,6 +88,7 @@ html {
 	content: "~";
 }
 
+/* Glass block effect */
 .glass-block {
 	background-color: #ddd;
 	border-radius: .5em;
@@ -91,32 +101,84 @@ html {
 	transition: all ease-out .5s;
 }
 
-.glass-block.herb {
-	/*transition: none;*/
-}
-
+/* Site header */
 .header,
 .logo {
 	background: #234311;
-	box-shadow: 3px 3px 3px rgba(35,67,17,.5);
+	box-shadow: 3px 3px 3px rgba(0,0,0,.5);
 	position: relative;
 	z-index: 10;
 }
 
 .header {
-	/* Prevent drop shadow from starting late */
 	background-image: linear-gradient(#4A6713, #234311 6em);
 	background-image: url('/static/img/nav.jpg');
-	background-size: auto 100%;
+	background-size: 100% auto;
+	/* Prevent drop shadow from starting late */
 	margin-left: -3px;
 	padding-left: 3px;
 }
 
+/* Site Logo */
+.logo {
+	background-image: linear-gradient(#689f00, #234311 75%);
+	border-radius: 0 0 .5em .5em;
+	float: left;
+	padding: 3.1em 1em .5em 1em;
+	margin: 0 1em 0 1em;
+}
+
+.logo>img {
+	border-radius: .25em;
+	box-shadow: 1px 1px .1em #182E0C;
+	height: 5em;
+	margin-top: -2.5em;
+	width: 6em;
+}
+
+/* Site Title */
+.site-title {
+	color: inherit;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/* Herb page */
 .herb {
 	display: inline-block;
 	margin: .5em;
 	text-align: center;
 	width: 12em;
+}
+
+.herb-details dt,
+.herb-details dd {
+	float: left;
+	padding-bottom: .5em;
+}
+
+.herb-details dt {
+	clear: left;
+	font-style: italic;
+	max-width: 10em;
+	text-align: right;
+	width: 10em;
+}
+
+.herb-image {
+	clear: both;
+	text-align: center;
+}
+
+.herb-image img {
+	max-width: 20em;
+}
+
+/* Herb thumbnails */
+.herb a {
+	color: #333;
+	text-decoration: none;
 }
 
 .herb img {
@@ -153,24 +215,6 @@ html {
 	text-align:center;
 }
 
-/* Logo */
-.logo {
-	background-image: linear-gradient(#4A6713 -3.1em, #234311 2.9em);
-	border-radius: 0 0 .5em .5em;
-	float: left;
-	padding: 3.1em 1em .5em 1em;
-	margin: 0 1em 0 1em;
-}
-
-.logo>img {
-	/*border: .1em solid #000;*/
-	border-radius: .25em;
-	box-shadow: 1px 1px .1em #182E0C;
-	height: 5em;
-	margin-top: -2.5em;
-	width: 6em;
-}
-
 /* Main Navigation */
 .nav {
 	list-style: none;
@@ -189,19 +233,11 @@ html {
 	text-decoration: none;
 }
 
-/* Site Title */
-.site-title {
-	color: inherit;
-	font-size: 1.5em;
-	font-weight: bold;
-	text-decoration: none;
-}
-
 /*= State ==================*/
 
 .a11y-link:active,
-.ally-link:focus {
-	top: 1em;
+.a11y-link:focus {
+	top: .5em;
 }
 
 .glass-block:active,

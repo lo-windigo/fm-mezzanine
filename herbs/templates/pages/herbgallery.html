@@ -5,25 +5,23 @@
 {% block main %}
 {{ block.super }}
 
-{% editable page.herbgallery.content %}
 {{ page.herbgallery.content|richtext_filters|safe }}
-{% endeditable %}
 		<section class="herbs">
 {% with page.herbgallery.herb_set.all as herbs %}
 {% for herb in herbs %}
 			<article class="herb glass-block">
-				<header>
-					<h1 class="herb-primary">{{ herb.title }}</h1>
-					<h2 class="herb-secondary">{{ herb.latin }}</h2>
-				</header>
-				<p>
-					<a title="{{ herb.title }}" href="{% url "herbs:herb" herb.slug %}">
+				<a title="{{ herb.title }}" href="{% url "herbs:herb" herb.slug %}">
+					<header>
+						<h1 class="herb-primary">{{ herb.title }}</h1>
+						<h2 class="herb-secondary">{{ herb.latin }}</h2>
+					</header>
+					<p>
 						<img src="{{ MEDIA_URL }}{% thumbnail herb.file 131 75 %}">
-					</a>
-				</p>
-				<p>
-					${{ herb.price_per_oz }}
-				</p>
+					</p>
+					<p>
+						${{ herb.price_per_oz }}/oz
+					</p>
+				</a>
 			</article>
 {% endfor %}
 {% endwith %}
