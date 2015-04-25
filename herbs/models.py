@@ -87,4 +87,9 @@ class Herb(Displayable):
 			name = "".join([s.upper() if i == 0 or name[i - 1] == " " else s
 							for i, s in enumerate(name)])
 			self.title = name
+			
+		"""
+		TODO: Create a thumbnail for the uploaded file
+		"""
+
 		super(Herb, self).save(*args, **kwargs)
