@@ -1,28 +1,70 @@
-{% extends "base.html" %}
-{% load i18n %}
+<!doctype html>
+<html>
 
-{% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
+<head>
+	<title>Flower Moon Farm</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/layout-home.css">
+</head>
 
-{% block breadcrumb_menu %}
-<li class="active">{% trans "Home" %}</li>
-{% endblock %}
+<body>
+	<div class="home-header">
+		<header>
+			<a href="/" class="home-logo">
+				<img src="/static/img/logo.jpg" width="256" height="320"
+					alt="The Flower Moon Farm Logo">
+			</a>
+		</header>
+		<section class="home-pitch">
+			<h1>Good Herbs, Grown Right</h1>
+			<p>
+				Flower Moon Farm is a women-owned herb farm in upstate New York growing
+				medicinal and traditional herbs. We use organic practices, growing with
+				reverence for Mother Earth.
+			</p>
+		</section>
+	</div>
+	<section class="teasers">
+		<article class="teaser glass-block">
+			<p class="teaser-img">
+				<a href="/about"><img src="/static/img/about-prev.jpg" alt=" "></a>
+			</p>
+			<h1><a href="/about">About</a></h1>
+			<p>
+				Learn about <strong>Flower Moon Farm</strong>; our philosophy, our
+				process, and who we are.
+			</p>
+		</article>
+		<article class="teaser glass-block">
+			<p class="teaser-img">
+				<a href="/herbs"><img src="/static/img/herb-prev.jpg" alt=" "></a>
+			</p>
+			<h1><a href="/herbs">Herbs</a></h1>
+			<p>
+				We offer a huge selection of <strong>responsibly grown
+				herbs</strong>, priced per dried ounce.
+			</p>
+		</article>
+		<article class="teaser glass-block">
+			<p class="teaser-img">
+				<a href="/contact"><img src="/static/img/contact-prev.jpg" alt=" "></a>
+			</p>
+			<h1><a href="/contact">Contact</a></h1>
+			<p>
+				<strong>Get in touch</strong> for more information, to place an order,
+				or to give us feedback.
+			</p>
+		</article>
+	</section>
+	<footer>
+		<nav>
+			<ul class="nav">
+			</ul>
+		</nav>
+		© 2014 Flower Moon Farm.
+	</footer>
+</body>
 
-{% block main %}
-{% blocktrans %}
-<h2>Congratulations!</h2>
-<p>
-    Welcome to your new Mezzanine powered website.
-    Here are some quick links to get you started:
-</p>
-<ul>
-    <li><a href="/admin/">Log in to the admin interface</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/content-architecture.html">Creating custom page types</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html#templates">Modifying HTML templates</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html#why-isn-t-the-homepage-a-page-object-i-can-edit-via-the-admin">Changing this homepage</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html">Other frequently asked questions</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/configuration.html#default-settings">Full list of settings</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/deployment.html">Deploying to a production server</a></li>
-</ul>
-{% endblocktrans %}
-{% endblock %}
+</html>

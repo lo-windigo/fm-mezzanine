@@ -36,7 +36,7 @@ urlpatterns += patterns("",
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    url("^$", direct_to_template, {"template": "pages/index.html"}, name="home"),
+    url("^$", direct_to_template, {"template": "index.html"}, name="home"),
 
     url("^herb/", include("herbs.urls", app_name="herbs", namespace="herbs")),
 

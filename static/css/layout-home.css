@@ -28,7 +28,6 @@ body {
 }
 
 .home-logo>img {
-	/*border: .1em solid #000;*/
 	border-radius: .5em;
 	box-shadow: 1px 1px .1em #182E0C;
 	height: 10em;
