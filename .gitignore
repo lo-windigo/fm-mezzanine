@@ -2,10 +2,14 @@
 *.pyo
 *.db
 *.swp
+bootstrap*
 .DS_Store
 .coverage
 local_settings.py
 /static/admin
+/static/css/mezzanine*
+/static/js/html5shiv.js
+/static/js/respond.min.js
 /static/filebrowser
 /static/fonts
 /static/grappelli
