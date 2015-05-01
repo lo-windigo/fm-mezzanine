@@ -47,10 +47,6 @@ section>h1 {
 
 html {
 	background: #f1f1f1;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 }
 
 
@@ -113,7 +109,10 @@ html {
 .header {
 	background-image: linear-gradient(#4A6713, #234311 6em);
 	background-image: url('/static/img/nav.jpg');
-	background-size: 100% auto;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	/* Prevent drop shadow from starting late */
 	margin-left: -3px;
 	padding-left: 3px;
@@ -152,10 +151,15 @@ html {
 	width: 12em;
 }
 
-.herb-details dt,
-.herb-details dd {
+.herb-details dd,
+.herb-details dt {
 	float: left;
 	padding-bottom: .5em;
+}
+
+.herb-details dd {
+	padding: 0;
+	margin: 0 0 0 1em;
 }
 
 .herb-details dt {
@@ -168,7 +172,7 @@ html {
 
 .herb-image {
 	clear: both;
-	text-align: center;
+	margin-left: 11em;
 }
 
 .herb-image img {
