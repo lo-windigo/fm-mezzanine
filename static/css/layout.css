@@ -5,6 +5,15 @@
 	Licensed AGPLv3, Rock on.
 */
 
+/*= Fonts ==================*/
+
+@font-face {
+	font-family:EBG;
+	src:		url("/static/fonts/eb-garamond.eot") format("eot"),
+				url("/static/fonts/eb-garamond.woff2") format("woff2"),
+				url("/static/fonts/eb-garamond.woff") format("woff");
+}
+
 
 /*= Base Styles ============*/
 
@@ -20,7 +29,7 @@ a {
 
 body {
 	color: #320;
-	font-family: serif;
+	font-family: EBG,'Garamond',serif;
 	font-size: 24px;
 	margin: 0;
 	/* Accessibility link positioning */
@@ -77,11 +86,11 @@ html {
 }
 
 .content-title:after {
-	content: "~";
+	content: "❧";
 }
 
 .content-title:before {
-	content: "~";
+	content: "☙";
 }
 
 /* Glass block effect */
